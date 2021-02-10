@@ -20,7 +20,6 @@ function renderExcerciseplans() {
 
                 // loop through Excercises and print each
                 plan.excercise.forEach(Excercise => {
-                    console.log(`${Excercise} Excercise line 23`)
                     const newLi = $("<li>", {
                         text: `Name: ${Excercise.name}\nLength(in min): ${Excercise.length}\nIs it Cardio: ${Excercise.isCardio ? 'Yes it is!' : 'No it isn\'t!'}\nIs it Strength? ${Excercise.isStrength ? "Yes it is!" : "No it isnt!"}`
                     })
