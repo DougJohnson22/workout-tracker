@@ -148,7 +148,7 @@ app.get('/api/plans', (req, res) => {
 // Read populated workout plans
 app.get('/populatedplans', (req, res) => {
     db.WorkoutPlan.find({})
-        .populate('excercises')
+        .populate('excercise')
         .then(dbPlan => {
             res.json(dbPlan)
         })

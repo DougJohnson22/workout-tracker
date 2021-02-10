@@ -8,7 +8,7 @@ function renderExcerciseplans() {
             console.log(dbData)
             dbData.forEach(plan => {
                 // make a new div each workout
-                const newDiv = $("<div>", {
+                const newDiv = $('<div>', {
                     style: 'width: 25%; border: 2px solid blue',
                 })
                 const title = $("<h3>", {
@@ -20,18 +20,19 @@ function renderExcerciseplans() {
 
                 // loop through Excercises and print each
                 plan.excercise.forEach(Excercise => {
+                    console.log(`${Excercise} Excercise line 23`)
                     const newLi = $("<li>", {
                         text: `Name: ${Excercise.name}\nLength(in min): ${Excercise.length}\nIs it Cardio: ${Excercise.isCardio ? 'Yes it is!' : 'No it isn\'t!'}\nIs it Strength? ${Excercise.isStrength ? "Yes it is!" : "No it isnt!"}`
                     })
                     newUl.append(newLi);
                 })
                 // FORM to add new Excercises to the plan
-                const newForm = $("<form>", {
+                const newForm = $('<form class="">', {
                     id: plan._id
                 })
                 const newBtn = $("<button>", {
                     text: 'Add Excercise...',
-                    class: 'update-btn',
+                    class: 'button',
                     'data-id': plan._id
                 })
                 const nameInput = $("<input>", {
