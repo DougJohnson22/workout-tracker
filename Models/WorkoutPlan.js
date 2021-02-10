@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const WorkoutPlanSchema = new Schema({
     name: String,
-    plans: [
+    excercise: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Excercise'

@@ -32,8 +32,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutplanner"
 // ROUTER
 // ================================================================================
 app.get('/', (req, res) => {
-    res.send('howdy there');
-    // res.sendFile('./index.html')
+    res.sendFile('./index.html')
 })
 
 // SEED DATA
@@ -77,7 +76,7 @@ app.get('/seedplans', (req, res) => {
             db.WorkoutPlan.create([
                 {
                     name: 'plan 1',
-                    plans: [
+                    excercise: [
                         result[Math.floor(Math.random() * result.length)]._id,
                         result[Math.floor(Math.random() * result.length)]._id,
                         result[Math.floor(Math.random() * result.length)]._id
@@ -85,26 +84,26 @@ app.get('/seedplans', (req, res) => {
                 },
                 {
                     name: 'plan 2',
-                    plans: [
+                    excercise: [
                         result[Math.floor(Math.random() * result.length)]._id,
                         result[Math.floor(Math.random() * result.length)]._id
                     ]
                 },
                 {
                     name: 'plan 3',
-                    plans: [
+                    excercise: [
                         result[Math.floor(Math.random() * result.length)]._id
                     ]
                 },
                 {
                     name: 'plan 4',
-                    plans: [
+                    excercise: [
                         result[Math.floor(Math.random() * result.length)]._id
                     ]
                 },
                 {
                     name: 'plan 5',
-                    plans: [
+                    excercise: [
                         result[Math.floor(Math.random() * result.length)]._id,
                         result[Math.floor(Math.random() * result.length)]._id,
                         result[Math.floor(Math.random() * result.length)]._id
@@ -134,7 +133,7 @@ app.get('/api/excercises', (req, res) => {
             res.json(dbExcercise);
         })
 })
-
+// get all plans
 app.get('/api/plans', (req, res) => {
     db.WorkoutPlan.find({})
         .then(dbPlan => {
@@ -146,6 +145,7 @@ app.get('/api/plans', (req, res) => {
         })
 })
 
+// Read populated workout plans
 app.get('/populatedplans', (req, res) => {
     db.WorkoutPlan.find({})
         .populate('excercises')
@@ -157,7 +157,7 @@ app.get('/populatedplans', (req, res) => {
             res.send(err);
         })
 })
-
+// Create Plan
 app.post('/api/plans', ({ body }, res) => {
     db.WorkoutPlan.create(body)
         .then(dbPlan => {
@@ -168,13 +168,14 @@ app.post('/api/plans', ({ body }, res) => {
             res.send(err);
         })
 })
-
+// Create Exercise
 app.post('/api/excercises', (req, res) => {
     console.log(req.body);
 
+    // Update Excercise
     db.Excercise.create(req.body)
         .then(dbExcercise => {
-            db.WorkoutPlan.findOneAndUpdate({ _id: req.body.WorkOutPlanId }, { $push: { excercises: dbExcercise._id } })
+            db.WorkoutPlan.findOneAndUpdate({ _id: req.body.planid }, { $push: { excercises: dbExcercise._id } })
                 .then(dbPlan => res.send(dbPlan))
         })
         .catch(err => res.json(err))

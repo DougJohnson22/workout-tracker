@@ -6,9 +6,8 @@ const ExcerciseSchema = new Schema({
     name: String,
     length: Number,
     isCardio: Boolean,
-    isStrength: Boolean,
-    
-})
+    isStrength: Boolean,    
+});
 
 
 const Excercise = mongoose.model("Excercise", ExcerciseSchema);
