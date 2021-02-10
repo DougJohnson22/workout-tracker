@@ -32,7 +32,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutplanner"
 // ROUTER
 // ================================================================================
 app.get('/', (req, res) => {
-    res.sendFile('./index.html')
+    res.sendFile(__dirname + './index.html')
 })
 
 // SEED DATA
